@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "model-explainability-mcp"
+version = "0.1.0"
+description = "An MCP server that lets Claude explain machine learning model predictions with SHAP."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["mcp", "model-context-protocol", "shap", "explainability", "machine-learning"]
+dependencies = [
+    "mcp>=1.2.0,<2",
+    "shap>=0.45",
+    "scikit-learn>=1.3",
+    "lightgbm>=4.0",
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+    "joblib>=1.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+explain-mcp = "explain_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/explain_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
